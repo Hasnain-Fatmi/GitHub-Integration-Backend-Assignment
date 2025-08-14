@@ -15,7 +15,7 @@ class AuthController:
             "client_id": settings.github_client_id,
             "redirect_uri": settings.github_redirect_uri,
             "scope": "user:email,read:org,repo",
-            "prompt": "consent"
+            #"prompt": "consent"
         }
         query_string = urllib.parse.urlencode(params)
         return f"https://github.com/login/oauth/authorize?{query_string}"
