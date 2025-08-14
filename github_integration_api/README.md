@@ -1,12 +1,6 @@
 # GitHub Integration Backend API
 
-A comprehensive FastAPI backend application that provides secure GitHub OAuth integration with full data synchronization capabilities. This API enables applications to authenticate with GitHub, fetch organizational data, and maintain synchronized repositories, commits, pull requests, issues, and user information through a modern REST API.
-
-## Project Description
-
-The GitHub Integration Backend API serves as a middleware solution that bridges applications with GitHub's data ecosystem. It implements OAuth2 authentication flows, comprehensive data fetching from GitHub's REST API, and provides a unified interface for querying synchronized GitHub data.
-
-This API is built with modern Python technologies and follows best practices for scalability, security, and performance. It's designed to handle high-volume data operations while maintaining data consistency and providing real-time access to GitHub information.
+A FastAPI backend application that provides GitHub OAuth integration with data synchronization. This API enables applications to authenticate with GitHub, fetch data, and maintain synchronized repositories, commits, pull requests, issues, and user information through a modern REST API.
 
 **Core Capabilities:**
 - **Complete GitHub OAuth2 Integration**: Secure authentication flow with GitHub using industry-standard OAuth2 protocols
