@@ -112,7 +112,7 @@ This API is built with modern Python technologies and follows best practices for
 
 ### Verification
 
-Test your installation with the provided utilities:
+Test your installation with the provided utilities (Navigate to Testing_Scripts in seperate terminal while Server is running):
 ```bash
 python test_oauth_flow.py        # Interactive OAuth flow testing
 python generate_test_data.py     # Generate sample data for testing

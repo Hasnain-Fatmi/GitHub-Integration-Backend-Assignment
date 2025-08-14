@@ -30,8 +30,14 @@ class GitHubAPI:
         return await self.make_request("/user")
 
     async def get_user_organizations(self) -> List[Dict[str, Any]]:
-        result = await self.make_request("/user/orgs")
-        return result if result else []
+        orgs = await self.make_request("/user/orgs")
+        if orgs:
+            return orgs
+        user_info = await self.get_user_info()
+        if user_info and "login" in user_info:
+            return await self.make_request(f"/users/{user_info['login']}/orgs") or []
+        return []
+
 
     async def get_organization_repos(self, org: str, page: int = 1, per_page: int = 100) -> List[Dict[str, Any]]:
         params = {"page": page, "per_page": per_page}
