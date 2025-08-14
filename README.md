@@ -17,11 +17,12 @@ This API is built with modern Python technologies and follows best practices for
 - **High-Performance Architecture**: Fully asynchronous operations using FastAPI, Motor, and HTTPX
 
 **Technology Stack:**
-- **Backend Framework**: FastAPI 0.104.1 with async/await support
+- **Backend Framework**: FastAPI
 - **Database**: MongoDB with Motor async driver for optimal performance
-- **HTTP Client**: HTTPX for GitHub API integration
-- **Authentication**: GitHub OAuth2 with secure token management
-- **Data Validation**: Pydantic for robust data modeling
+- **OAuth**:  GitHub OAuth2 via httpx
+- **Data Validation**: Pydantic for data modeling
+- **API Client**: GitHub REST API v3
+
 
 ## Setup Instructions
 
