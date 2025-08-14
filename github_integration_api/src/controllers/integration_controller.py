@@ -84,15 +84,12 @@ class IntegrationController:
         
         try:
             # Fetch and store organizations
-            print(f"DEBUG - Starting to fetch organizations for user {user_id}")
             orgs = await github_api.get_user_organizations()
-            print(f"DEBUG - Organizations fetched: {orgs}")
+
             if not orgs:
                 orgs = []
-                print(f"DEBUG - No organizations found, initialized empty list")
                 
             if orgs:
-                print(f"DEBUG - Processing {len(orgs)} organizations")
                 org_documents = []
                 for org in orgs:
                     org_doc = org.copy()
@@ -102,7 +99,6 @@ class IntegrationController:
                 if org_documents:
                     await insert_many("github_organizations", org_documents)
                     sync_stats["organizations"] = len(org_documents)
-                    print(f"DEBUG - Inserted {len(org_documents)} organizations into database")
                 
                 # Fetch organization members
                 user_documents = []
