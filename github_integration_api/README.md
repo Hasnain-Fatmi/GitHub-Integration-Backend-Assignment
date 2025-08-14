@@ -37,7 +37,7 @@ This API is built with modern Python technologies and follows best practices for
 1. **Clone Repository and Environment Setup**
    ```bash
    git clone https://github.com/Hasnain-Fatmi/GitHub-Integration-Backend-Assignment
-   cd "GitHub Integration Backend Assignment"
+   cd "github_integration_api"
    
    # Create virtual environment
    python -m venv venv
@@ -101,7 +101,7 @@ This API is built with modern Python technologies and follows best practices for
    python main.py
    
    # Production mode (alternative)
-   uvicorn github_integration_api.src.server:app --host 0.0.0.0 --port 8000
+   uvicorn src.server:app --host 0.0.0.0 --port 8000
    ```
 
 ### Access Points
@@ -114,6 +114,7 @@ This API is built with modern Python technologies and follows best practices for
 
 Test your installation with the provided utilities (Navigate to Testing_Scripts in seperate terminal while Server is running):
 ```bash
+cd Testing_Scripts
 python test_oauth_flow.py        # Interactive OAuth flow testing
 python generate_test_data.py     # Generate sample data for testing
 python test_api_data.py          # API endpoint validation
