@@ -27,7 +27,7 @@ This API is built with modern Python technologies and follows best practices for
 
 ### Prerequisites
 
-- **Python 3.8 or higher** - Required for modern async/await features
+- **Python 3.11** - Required for modern async/await features
 - **MongoDB** - Local installation or MongoDB Atlas cloud service
 - **GitHub OAuth Application** - Required for authentication integration
 - **Git** - For repository cloning and version control
