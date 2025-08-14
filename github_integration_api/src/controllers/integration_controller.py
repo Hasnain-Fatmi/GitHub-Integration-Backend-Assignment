@@ -144,7 +144,7 @@ class IntegrationController:
                     owner = repo["owner"]["login"]
                     repo_name = repo["name"]
                     
-                    # Fetch ALL commits with pagination
+                    # Fetch ALL commits
                     all_commits = []
                     page = 1
                     while True:
@@ -152,7 +152,7 @@ class IntegrationController:
                         if not commits:
                             break
                         all_commits.extend(commits)
-                        if len(commits) < 100:  # Last page
+                        if len(commits) < 100:
                             break
                         page += 1
                     
@@ -167,7 +167,7 @@ class IntegrationController:
                         await insert_many("github_commits", commit_documents)
                         sync_stats["commits"] += len(commit_documents)
                     
-                    # Fetch ALL pull requests with pagination
+                    # Fetch ALL pull requests
                     all_pulls = []
                     page = 1
                     while True:
@@ -175,7 +175,7 @@ class IntegrationController:
                         if not pulls:
                             break
                         all_pulls.extend(pulls)
-                        if len(pulls) < 100:  # Last page
+                        if len(pulls) < 100:
                             break
                         page += 1
                     
@@ -190,7 +190,7 @@ class IntegrationController:
                         await insert_many("github_pulls", pull_documents)
                         sync_stats["pulls"] += len(pull_documents)
                     
-                    # Fetch ALL issues with pagination
+                    # Fetch ALL issues
                     all_issues = []
                     page = 1
                     while True:
@@ -198,7 +198,7 @@ class IntegrationController:
                         if not issues:
                             break
                         all_issues.extend(issues)
-                        if len(issues) < 100:  # Last page
+                        if len(issues) < 100:
                             break
                         page += 1
                     
@@ -215,7 +215,7 @@ class IntegrationController:
                             await insert_many("github_issues", issue_documents)
                             sync_stats["issues"] += len(issue_documents)
                     
-                    # Fetch ALL events with pagination
+                    # Fetch ALL events
                     all_events = []
                     page = 1
                     while True:
@@ -223,7 +223,7 @@ class IntegrationController:
                         if not events:
                             break
                         all_events.extend(events)
-                        if len(events) < 100:  # Last page
+                        if len(events) < 100:
                             break
                         page += 1
                     
