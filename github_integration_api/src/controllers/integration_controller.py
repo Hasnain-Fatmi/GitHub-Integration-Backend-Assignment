@@ -144,15 +144,25 @@ class IntegrationController:
                 sync_stats["repositories"] = len(repo_documents)
                 
                 # Fetch data for each repository
-                for repo in all_repos[:50]:
+                for repo in all_repos:
                     owner = repo["owner"]["login"]
                     repo_name = repo["name"]
                     
-                    # Fetch commits
-                    commits = await github_api.get_repository_commits(owner, repo_name, per_page=50)
-                    if commits:
+                    # Fetch ALL commits with pagination
+                    all_commits = []
+                    page = 1
+                    while True:
+                        commits = await github_api.get_repository_commits(owner, repo_name, page=page, per_page=100)
+                        if not commits:
+                            break
+                        all_commits.extend(commits)
+                        if len(commits) < 100:  # Last page
+                            break
+                        page += 1
+                    
+                    if all_commits:
                         commit_documents = []
-                        for commit in commits:
+                        for commit in all_commits:
                             commit_doc = commit.copy()
                             commit_doc["integration_user_id"] = user_id
                             commit_doc["repository"] = repo["full_name"]
@@ -161,11 +171,21 @@ class IntegrationController:
                         await insert_many("github_commits", commit_documents)
                         sync_stats["commits"] += len(commit_documents)
                     
-                    # Fetch pull requests
-                    pulls = await github_api.get_repository_pulls(owner, repo_name, per_page=50)
-                    if pulls:
+                    # Fetch ALL pull requests with pagination
+                    all_pulls = []
+                    page = 1
+                    while True:
+                        pulls = await github_api.get_repository_pulls(owner, repo_name, page=page, per_page=100)
+                        if not pulls:
+                            break
+                        all_pulls.extend(pulls)
+                        if len(pulls) < 100:  # Last page
+                            break
+                        page += 1
+                    
+                    if all_pulls:
                         pull_documents = []
-                        for pull in pulls:
+                        for pull in all_pulls:
                             pull_doc = pull.copy()
                             pull_doc["integration_user_id"] = user_id
                             pull_doc["repository"] = repo["full_name"]
@@ -174,12 +194,21 @@ class IntegrationController:
                         await insert_many("github_pulls", pull_documents)
                         sync_stats["pulls"] += len(pull_documents)
                     
-                    # Fetch issues
-                    issues = await github_api.get_repository_issues(owner, repo_name, per_page=50)
-                    if issues:
+                    # Fetch ALL issues with pagination
+                    all_issues = []
+                    page = 1
+                    while True:
+                        issues = await github_api.get_repository_issues(owner, repo_name, page=page, per_page=100)
+                        if not issues:
+                            break
+                        all_issues.extend(issues)
+                        if len(issues) < 100:  # Last page
+                            break
+                        page += 1
+                    
+                    if all_issues:
                         issue_documents = []
-                        for issue in issues:
-                           
+                        for issue in all_issues:
                             if "pull_request" not in issue:
                                 issue_doc = issue.copy()
                                 issue_doc["integration_user_id"] = user_id
@@ -190,11 +219,21 @@ class IntegrationController:
                             await insert_many("github_issues", issue_documents)
                             sync_stats["issues"] += len(issue_documents)
                     
-                    # Fetch changelogs
-                    events = await github_api.get_repository_issue_events(owner, repo_name, per_page=50)
-                    if events:
+                    # Fetch ALL events with pagination
+                    all_events = []
+                    page = 1
+                    while True:
+                        events = await github_api.get_repository_issue_events(owner, repo_name, page=page, per_page=100)
+                        if not events:
+                            break
+                        all_events.extend(events)
+                        if len(events) < 100:  # Last page
+                            break
+                        page += 1
+                    
+                    if all_events:
                         event_documents = []
-                        for event in events:
+                        for event in all_events:
                             event_doc = event.copy()
                             event_doc["integration_user_id"] = user_id
                             event_doc["repository"] = repo["full_name"]
