@@ -36,7 +36,7 @@ This API is built with modern Python technologies and follows best practices for
 
 1. **Clone Repository and Environment Setup**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Hasnain-Fatmi/GitHub-Integration-Backend-Assignment
    cd "GitHub Integration Backend Assignment"
    
    # Create virtual environment
